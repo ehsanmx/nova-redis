@@ -1,0 +1,2 @@
+# nova-redis
+Redis manager
