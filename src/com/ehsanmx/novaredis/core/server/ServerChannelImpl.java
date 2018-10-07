@@ -7,6 +7,7 @@ import com.ehsanmx.novaredis.model.Server;
 import redis.clients.jedis.Jedis;
 
 import java.util.List;
+import java.util.Map;
 
 // TODO interface is missing
 public class ServerChannelImpl implements ServerChannel {
@@ -23,7 +24,7 @@ public class ServerChannelImpl implements ServerChannel {
     }
 
     @Override
-    public List<Database> findServerDatabases(Server server) {
+    public Map<String, Database> findServerDatabases(Server server) {
         return null;
     }
 
@@ -43,12 +44,12 @@ public class ServerChannelImpl implements ServerChannel {
     }
 
     @Override
-    public List<Entry> match(Database database) {
+    public Map<String, Entry> match(Database database) {
         return null;
     }
 
     @Override
-    public List<EntryGroup> matchWithGroup(Database database) {
+    public Map<String, EntryGroup> matchWithGroup(Database database) {
         return null;
     }
 }

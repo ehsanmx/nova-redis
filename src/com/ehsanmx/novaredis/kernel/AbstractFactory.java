@@ -9,7 +9,7 @@ public class AbstractFactory {
         return new ViewFactory();
     }
 
-    protected CoreFactory getModelFactory() {
+    protected CoreFactory getCoreFactory() {
         return new CoreFactory();
     }
 }

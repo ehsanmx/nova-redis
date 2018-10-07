@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeCell;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -28,15 +30,32 @@ public class RedisTreeCell<T> extends TreeCell<String> implements Cloneable{
             setText("");
             setGraphic(null);
         } else {
-            setText(item);
             this.createServerMenu();
             this.createInstanceMenu();
             if (item.equals("Servers")) {
+                setText(item);
                 setContextMenu(this.serverMenu);
-            } else {
+            } else if (item.startsWith("srv_")) {
+                setText(item.replaceAll("srv_", ""));
+                setGraphic(getServerIcon());
                 setContextMenu(this.instanceMenu);
+            } else if (item.startsWith("db_")) {
+                setText(item.replaceAll("db_", ""));
+                setGraphic(getDatabaseIcon());
             }
         }
+    }
+
+    private ImageView getServerIcon() {
+        return new ImageView(
+                new Image(getClass().getResourceAsStream("/com/ehsanmx/novaredis/resources/icon/server.png"))
+        );
+    }
+
+    private ImageView getDatabaseIcon() {
+        return new ImageView(
+                new Image(getClass().getResourceAsStream("/com/ehsanmx/novaredis/resources/icon/database.png"))
+        );
     }
 
     private void createServerMenu() {
@@ -57,6 +76,10 @@ public class RedisTreeCell<T> extends TreeCell<String> implements Cloneable{
     private void showServerDialog() {
         System.out.println("New server:" + getItem());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/ehsanmx/novaredis/resources/view/serverDialog.fxml"));
+        ServerController serverController = (ServerController) this.serverController;
+        FXMLLoader mainLoader = (FXMLLoader) this.getScene().getUserData();
+        serverController.init(mainLoader.getController());
+
         loader.setController(this.serverController);
         try {
             Parent root = loader.load();

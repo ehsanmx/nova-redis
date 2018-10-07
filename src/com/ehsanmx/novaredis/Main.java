@@ -18,7 +18,9 @@ public class Main extends Application {
         Parent root = (Parent)loader.load();
 
         primaryStage.setTitle("NovaRedis 1.0");
-        primaryStage.setScene(new Scene(root, 700, 500));
+        Scene scene = new Scene(root, 700, 500);
+        scene.setUserData(loader);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

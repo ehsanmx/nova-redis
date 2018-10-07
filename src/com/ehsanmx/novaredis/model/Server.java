@@ -56,4 +56,14 @@ public class Server {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        return "Server{" +
+                "name='" + name + '\'' +
+                ", host='" + host + '\'' +
+                ", port=" + port +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

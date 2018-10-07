@@ -24,16 +24,16 @@
    <children>
       <HBox alignment="BOTTOM_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <children>
-            <Button mnemonicParsing="false" text="Test Connection">
+            <Button fx:id="btnTest" mnemonicParsing="false" onAction="#testAction" text="Test Connection">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin>
             </Button>
-            <Button mnemonicParsing="false" prefWidth="75" text="OK">
+            <Button fx:id="btnOK" mnemonicParsing="false" onAction="#okAction" prefWidth="75" text="OK">
                <HBox.margin>
                   <Insets right="10.0" />
                </HBox.margin></Button>
-            <Button mnemonicParsing="false" prefWidth="75" text="Cancel" />
+            <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelAction" prefWidth="75" text="Cancel" />
          </children>
          <GridPane.margin>
             <Insets />
@@ -45,21 +45,21 @@
       <Label text="Host" GridPane.rowIndex="1" />
       <Label text="Password" GridPane.rowIndex="3" />
       <Label text="Port" GridPane.rowIndex="2" />
-      <TextField maxWidth="200" prefWidth="200.0" GridPane.columnIndex="1" GridPane.hgrow="NEVER">
+      <TextField fx:id="txtServerName" maxWidth="200" prefWidth="200.0" promptText="Name" GridPane.columnIndex="1" GridPane.hgrow="NEVER">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField layoutX="149.0" layoutY="13.0" maxWidth="200" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <TextField fx:id="txtHost" layoutX="149.0" layoutY="13.0" maxWidth="200" prefWidth="200.0" promptText="127.0.0.1" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin></TextField>
-      <TextField layoutX="139.0" layoutY="46.0" maxWidth="100" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <TextField fx:id="txtPort" layoutX="139.0" layoutY="46.0" maxWidth="100" prefWidth="200.0" promptText="6379" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>
       </TextField>
-      <TextField layoutX="139.0" layoutY="79.0" maxWidth="200" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <TextField fx:id="txtPassword" layoutX="139.0" layoutY="79.0" maxWidth="200" prefWidth="200.0" promptText="Optional" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets left="10.0" />
          </GridPane.margin>

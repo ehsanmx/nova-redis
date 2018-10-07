@@ -5,13 +5,13 @@ import com.ehsanmx.novaredis.model.Entry;
 import com.ehsanmx.novaredis.model.EntryGroup;
 import com.ehsanmx.novaredis.model.Server;
 
-import java.util.List;
+import java.util.Map;
 
 public interface ServerChannel {
 
     public String getServerInfo(Server server);
 
-    public List<Database> findServerDatabases(Server server);
+    public Map<String, Database> findServerDatabases(Server server);
 
     public String getServerDatabaseInfo(Database database);
 
@@ -19,7 +19,7 @@ public interface ServerChannel {
 
     public void set(String key, String value);
 
-    public List<Entry> match(Database database);
+    public Map<String, Entry> match(Database database);
 
-    public List<EntryGroup> matchWithGroup(Database database);
+    public Map<String, EntryGroup> matchWithGroup(Database database);
 }
