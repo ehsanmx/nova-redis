@@ -1,4 +1,4 @@
-package com.ehsanmx.novaredis.core.server;
+package com.ehsanmx.novaredis.core.redis;
 
 import com.ehsanmx.novaredis.model.Database;
 import com.ehsanmx.novaredis.model.Entry;
@@ -7,11 +7,13 @@ import com.ehsanmx.novaredis.model.Server;
 
 import java.util.Map;
 
-public interface ServerChannel {
+public interface RedisClient {
 
-    public String getServerInfo(Server server);
+    public RedisClient build(Server server);
 
-    public Map<String, Database> findServerDatabases(Server server);
+    public String getServerInfo();
+
+    public Map<String, Database> findServerDatabases();
 
     public String getServerDatabaseInfo(Database database);
 
@@ -22,4 +24,6 @@ public interface ServerChannel {
     public Map<String, Entry> match(Database database);
 
     public Map<String, EntryGroup> matchWithGroup(Database database);
+
+    public boolean testConnection();
 }

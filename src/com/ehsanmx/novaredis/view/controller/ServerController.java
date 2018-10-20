@@ -1,19 +1,19 @@
 package com.ehsanmx.novaredis.view.controller;
 
-import com.ehsanmx.novaredis.core.server.ServerConnection;
+import com.ehsanmx.novaredis.core.server.ServerRepository;
 import com.ehsanmx.novaredis.model.Server;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.stage.Window;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ServerController implements Initializable {
 
-    private ServerConnection serverConnection;
+    private ServerRepository serverRepository;
 
     @FXML
     public Label footer;
@@ -30,10 +30,13 @@ public class ServerController implements Initializable {
     @FXML
     protected TextField txtPassword;
 
+    @FXML
+    protected Button btnTest;
+
     private MainController mainController;
 
-    public ServerController(ServerConnection serverConnection) {
-        this.serverConnection = serverConnection;
+    public ServerController(ServerRepository serverRepository) {
+        this.serverRepository = serverRepository;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class ServerController implements Initializable {
 
     public void okAction() {
         Server server = createHydratedServer();
-        this.serverConnection.save(server);
+        this.serverRepository.save(server);
         this.mainController.updateLabel("New server was added.");
         this.mainController.updateTreeView(server);
         txtServerName.getScene().getWindow().hide();
@@ -53,7 +56,8 @@ public class ServerController implements Initializable {
     }
 
     public void testAction() {
-        System.out.println("Test");
+        Server server = createHydratedServer();
+//        System.out.println(this.serverRepository.testConnection(server));
     }
 
     protected Server createHydratedServer() {

@@ -1,18 +1,17 @@
 package com.ehsanmx.novaredis.core;
 
-import com.ehsanmx.novaredis.core.server.ServerChannel;
-import com.ehsanmx.novaredis.core.server.ServerChannelImpl;
-import com.ehsanmx.novaredis.core.server.ServerConnection;
-import com.ehsanmx.novaredis.core.server.ServerConnectionImpl;
-import redis.clients.jedis.Jedis;
+import com.ehsanmx.novaredis.core.redis.RedisClient;
+import com.ehsanmx.novaredis.core.redis.RedisClientImpl;
+import com.ehsanmx.novaredis.core.server.ServerRepository;
+import com.ehsanmx.novaredis.core.server.ServerRepositoryImpl;
 
 public class CoreFactory {
 
-    public ServerChannel createServerChannel() {
-        return new ServerChannelImpl();
+    public RedisClient createRedisClient() {
+        return new RedisClientImpl();
     }
 
-    public ServerConnection createServerConnection() {
-        return new ServerConnectionImpl();
+    public ServerRepository createServerRepository() {
+        return new ServerRepositoryImpl();
     }
 }
