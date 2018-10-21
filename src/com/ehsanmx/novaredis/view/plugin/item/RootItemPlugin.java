@@ -9,12 +9,16 @@ public class RootItemPlugin implements ItemPlugin {
     private ContextMenu serverMenu = null;
 
     @Override
+    public void init(RedisTreeCell redisTreeCell) {
+        this.createServerMenu(redisTreeCell);
+    }
+
+    @Override
     public void updateItem(RedisTreeCell redisTreeCell, String item) {
-            this.createServerMenu(redisTreeCell);
-            if (item.equals("Servers")) {
-                redisTreeCell.setText(item);
-                redisTreeCell.setContextMenu(this.serverMenu);
-            }
+        if (item.equals("Servers")) {
+            redisTreeCell.setText(item);
+            redisTreeCell.setContextMenu(this.serverMenu);
+        }
     }
 
     private void createServerMenu(RedisTreeCell redisTreeCell) {

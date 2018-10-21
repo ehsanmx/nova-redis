@@ -26,6 +26,13 @@ public class RedisTreeCell<T> extends TreeCell<String> implements Cloneable{
         this.itemPlugins.add(new RootItemPlugin());
         this.itemPlugins.add(new ServerItemPlugin());
         this.itemPlugins.add(new DatabaseItemPlugin());
+        this.init();
+    }
+
+    private void init() {
+        for(ItemPlugin itemPlugin: this.itemPlugins) {
+            itemPlugin.init(this);
+        }
     }
 
     @Override

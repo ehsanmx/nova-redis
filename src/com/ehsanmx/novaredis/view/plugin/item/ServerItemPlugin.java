@@ -11,7 +11,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import java.util.Map;
 
 public class ServerItemPlugin extends AbstractPlugin implements ItemPlugin {
@@ -26,15 +25,20 @@ public class ServerItemPlugin extends AbstractPlugin implements ItemPlugin {
     }
 
     @Override
+    public void init(RedisTreeCell redisTreeCell) {
+        createInstanceMenu(redisTreeCell);
+    }
+
+    @Override
     public void updateItem(RedisTreeCell redisTreeCell, String item) {
-        this.createInstanceMenu(redisTreeCell);
         if (item.startsWith("srv_")) {
             String serverName = item.replaceAll("srv_", "");
             redisTreeCell.setText(serverName);
             redisTreeCell.setGraphic(this.getServerIcon());
             redisTreeCell.setContextMenu(this.instanceMenu);
-            redisTreeCell.addEventHandler(MouseEvent.MOUSE_CLICKED, (event -> {
+            redisTreeCell.setOnMouseClicked((event -> {
                 if (event.getClickCount() == 2) {
+                    System.out.println("m-s");
                     this.createDatabaseItems(redisTreeCell, serverName);
                 }
             }));
@@ -53,16 +57,17 @@ public class ServerItemPlugin extends AbstractPlugin implements ItemPlugin {
         }
 
         this.instanceMenu = new ContextMenu();
-        MenuItem editInstanceItem = new MenuItem("Edit new server ...");
+        MenuItem editInstanceItem = new MenuItem("Edit ...");
         this.instanceMenu.getItems().add(editInstanceItem);
         editInstanceItem.setOnAction((event) -> {
             System.out.println("Edit server:" + redisTreeCell.getItem());
         });
-
-        System.out.println(this.instanceMenu);
     }
 
     private void createDatabaseItems(RedisTreeCell redisTreeCell, String serverName) {
+        if (redisTreeCell.getTreeItem().getChildren().size() > 0) {
+            return;
+        }
         Server server = this.serverRepository.load(serverName);
         Map<String, Database> databaseMap = this.redisClient.build(server).findServerDatabases();
         databaseMap.forEach((name, database) -> {
